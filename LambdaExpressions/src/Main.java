@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class Main
 {
-    //private static String staffFile = "G:\\Java Projects\\LambdaExpressions\\LambdaExpressions\\data\\staff.txt"; *мой путь
+    //private static String staffFile = "G:\\Java Projects\\LambdaExpressions\\LambdaExpressions\\data\\staff.txt"; //мой путь
     private static String staffFile = "data/staff.txt";
     private static String dateFormat = "dd.MM.yyyy";
 
@@ -15,15 +15,7 @@ public class Main
     {
         ArrayList<Employee> staff = loadStaffFromFile();
 
-        //вариант 0,5 - тоже рабочий
-        /*Collections.sort(staff, (o1, o2) ->
-            o1.getName().compareTo(o2.getName())
-        );
-        Collections.sort(staff, (o1, o2) ->
-                o1.getSalary().compareTo(o2.getSalary())
-        );*/
-
-        Collections.sort(staff, (o1, o2) -> {
+        /*Collections.sort(staff, (o1, o2) -> {
             if(o1.getSalary() < o2.getSalary()){
                 return -1;
             }
@@ -36,7 +28,13 @@ public class Main
         });
         for(Employee employee : staff){
             System.out.println(employee);
-        }
+        }*/
+
+        System.out.println("Макимальная зарплата сотрудника, пришедшего в 2017 году, у:");
+        staff.stream()
+                .filter(e -> e.getWorkStart().toString().endsWith("2017"))
+                .max(Comparator.comparing(Employee::getSalary))
+                .ifPresent(System.out::println);
     }
 
     private static ArrayList<Employee> loadStaffFromFile()
