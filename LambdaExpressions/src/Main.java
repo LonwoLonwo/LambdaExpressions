@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 public class Main
 {
-    //private static String staffFile = "G:\\Java Projects\\LambdaExpressions\\LambdaExpressions\\data\\staff.txt"; //мой путь
-    private static String staffFile = "data/staff.txt";
+    private static String staffFile = "G:\\Java Projects\\LambdaExpressions\\LambdaExpressions\\data\\staff.txt"; //мой путь
+    //private static String staffFile = "data/staff.txt";
     private static String dateFormat = "dd.MM.yyyy";
 
     public static void main(String[] args)
@@ -33,6 +33,7 @@ public class Main
         System.out.println("Макимальная зарплата сотрудника, пришедшего в 2017 году, у:");
         staff.stream()
                 .filter(e -> e.getWorkStart().toString().endsWith("2017"))
+                //.filter(e -> e.getWorkStart().getYear() == (2017-1900))
                 .max(Comparator.comparing(Employee::getSalary))
                 .ifPresent(System.out::println);
     }
